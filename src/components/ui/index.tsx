@@ -3,3 +3,7 @@ export * from "./label";
 export * from "./use-toast";
 export * from "./textarea";
 export * from "./button";
+export * from "./dialog";
+export * from "./card";
+export * from "./chart";
+export * from "./tooltip";
