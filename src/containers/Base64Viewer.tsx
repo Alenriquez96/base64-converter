@@ -12,8 +12,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui";
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import Image from "next/image";
+import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 
 const Base64Viewer = () => {
   const [base64, setBase64] = useState<string | null>(null);
@@ -35,9 +36,6 @@ const Base64Viewer = () => {
       }
 
       setBase64(e.target.value);
-
-      const fileFormat = e.target.value.split(";")[0].split("/")[1];
-      fetchBase64(fileFormat);
     } catch (error: any) {
       console.log(error);
       setBase64(null);
@@ -72,6 +70,12 @@ const Base64Viewer = () => {
     }
   }
 
+  useEffect(() => {
+    if (!base64) return;
+    const fileFormat = base64.split(";")[0].split("/")[1];
+    fetchBase64(fileFormat);
+  }, [base64]);
+
   return (
     <Card className="m-8 *:my-4 ">
       <CardHeader>
@@ -93,20 +97,26 @@ const Base64Viewer = () => {
             ) : (
               <TooltipProvider>
                 <Tooltip>
-                  <TooltipTrigger asChild>
-                    <a href={base64Download} download={true}>
-                      <Image
-                        src={base64}
-                        width={500}
-                        height={500}
-                        alt="Base64 Image"
-                        className="my-4"
-                        onError={handleBase64Error}
-                        onLoadStart={() => setImgLoading(true)}
-                        onLoad={() => setImgLoading(false)}
-                      />
-                    </a>
-                  </TooltipTrigger>
+                  <CardContainer>
+                    <CardBody>
+                      <CardItem translateZ={50} as="div">
+                        <a href={base64Download} download={true}>
+                          <TooltipTrigger asChild>
+                            <Image
+                              src={base64}
+                              width={500}
+                              height={500}
+                              alt="Base64 Image"
+                              className="my-4 object-cover block"
+                              onError={handleBase64Error}
+                              onLoadStart={() => setImgLoading(true)}
+                              onLoad={() => setImgLoading(false)}
+                            />
+                          </TooltipTrigger>
+                        </a>
+                      </CardItem>
+                    </CardBody>
+                  </CardContainer>
                   <TooltipContent sticky="always" side="right">
                     <p>Click to download</p>
                   </TooltipContent>
