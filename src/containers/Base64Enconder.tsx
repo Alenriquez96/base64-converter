@@ -96,7 +96,7 @@ const Base64Enconder = ({ setChartData }: Base64EnconderProps) => {
   };
 
   return (
-    <Card className="m-8 *:my-4 max-w-[90rem]">
+    <Card className="my-8 *:my-4 w-full">
       <CardHeader>
         <CardTitle>Upload File to convert to Base64</CardTitle>
       </CardHeader>

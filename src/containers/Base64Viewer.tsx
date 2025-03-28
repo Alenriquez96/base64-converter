@@ -75,7 +75,7 @@ const Base64Viewer = () => {
   }, [base64]);
 
   return (
-    <Card className="m-8 *:my-4 ">
+    <Card className="my-8 *:my-4 ">
       <CardHeader>
         <CardTitle>Base64 Viewer</CardTitle>
         <CardDescription>Only images supported</CardDescription>
