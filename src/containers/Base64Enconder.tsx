@@ -31,7 +31,13 @@ const Base64Enconder = ({ setChartData }: Base64EnconderProps) => {
         base64Converter(files[0]);
       }
     } catch (error: any) {
-      console.log(error);
+      console.error(error);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: error.message,
+        duration: 3000,
+      });
     }
   };
 
@@ -90,9 +96,9 @@ const Base64Enconder = ({ setChartData }: Base64EnconderProps) => {
   };
 
   return (
-    <Card className="m-8 *:my-4">
+    <Card className="m-8 *:my-4 max-w-[90rem]">
       <CardHeader>
-        <CardTitle>Upload File</CardTitle>
+        <CardTitle>Upload File to convert to Base64</CardTitle>
       </CardHeader>
       <CardContent>
         <Input type="file" className="cursor-pointer" onChange={handleImage} />
@@ -100,14 +106,14 @@ const Base64Enconder = ({ setChartData }: Base64EnconderProps) => {
           <>
             {base64 && (
               <div className="flex flex-col ">
-                <div className="*:m-4 my-4 flex flex-wrap">
+                <div className="*:mr-4 my-4 flex flex-wrap">
                   <Button onClick={onCopyToCliboard} className="*:mx-2">
                     Copy to Clipboard
                     <IconClipboard size={20} />
                   </Button>
                   <FullBase64Dialog base64={base64} />
                 </div>
-                <p className="text-gray-500 text-[10px] break-words whitespace-nowrap truncate overflow-hidden text-ellipsis mx-4">
+                <p className="text-gray-500 text-[10px] break-words whitespace-nowrap truncate overflow-hidden text-ellipsis ">
                   {base64}
                 </p>
               </div>

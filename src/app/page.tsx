@@ -13,14 +13,14 @@ export default function Home() {
   const [chartData, setchartData] = useState<ChartData[]>([]);
 
   const setData = (data: ChartData[]) => {
-    setchartData(data);
+    // setchartData(data);
   };
 
   return (
-    <main className="min-h-screen ">
+    <main className="min-h-screen">
       <Base64Enconder setChartData={setData} />
       <Base64Viewer />
-      {chartData.length > 0 && <SizeChart chartData={chartData} />}
+      {/* {chartData.length > 0 && <SizeChart chartData={chartData} />} */}
     </main>
   );
 }

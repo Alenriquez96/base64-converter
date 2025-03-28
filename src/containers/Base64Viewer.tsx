@@ -24,20 +24,20 @@ const Base64Viewer = () => {
   const [error, setError] = useState(false);
 
   const handleBase64 = (e: any) => {
-    setError(false);
     try {
-      if (!e.target.value) {
+      setError(false);
+      if (!e.target.value.trim()) {
         setBase64(null);
         return;
       }
 
-      if (!e.target.value.startsWith("data:image")) {
+      if (!e.target.value.trim().startsWith("data:image")) {
         throw new Error("Invalid Base64");
       }
 
       setBase64(e.target.value);
     } catch (error: any) {
-      console.log(error);
+      console.error(error);
       setBase64(null);
       toast({
         variant: "destructive",
@@ -49,8 +49,6 @@ const Base64Viewer = () => {
   };
 
   const handleBase64Error = (e: SyntheticEvent) => {
-    console.log(e);
-
     setBase64(null);
     setError(true);
   };
@@ -84,7 +82,7 @@ const Base64Viewer = () => {
       </CardHeader>
       <CardContent className="flex flex-col items-center ">
         <Textarea
-          onChange={handleBase64}
+          onBlur={handleBase64}
           name="base64"
           className="w-full"
           placeholder="Enter Base64"
